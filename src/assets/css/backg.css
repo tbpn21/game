@@ -1,0 +1,31 @@
+.main {
+  margin-top: 50px;
+}
+.top {
+  margin: 10px;
+}
+.back {
+  background: #ecdede;
+  width: 500px;
+  height: 570px;
+  margin: auto;
+  padding: 10px;
+}
+.m {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background:cornflowerblue;
+  float: left;
+  border-radius: 15%;
+}
+.moudel {
+  line-height: 100px;
+  background: coral;
+  border-radius: 15%;
+  font-size: 50px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+

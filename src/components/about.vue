@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <h1>关于</h1>
-        <h3>关于的内容</h3>
+    <div id="index">
+    
         <v-app>
-        <v-rating>khkjh</v-rating></v-app>
+        <v-rating id="grade"></v-rating>
+        </v-app>
     </div>
 </template>
 
@@ -12,3 +12,6 @@
         name:'about'
     }
 </script>
+<style>
+ @import "../assets/css/menu.css";
+</style>
