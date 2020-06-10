@@ -74,22 +74,134 @@
             a23: "",a30: "",a31: "",a32: "",a33: ""
         }
        },
+       methods: {
+           create(){
+        let c3=(Math.random()*3).toFixed(0)
+        let c4=(Math.random()*3).toFixed(0)
+        let randoms=Math.random().toFixed(1)
+        if(this["a"+c3+c4]){
+            this.create()
+        } 
+        else{
+        this["a"+c3+c4]=this.arr[randoms>0.6? 1:0]
+        }//产生随机数（2||4）的方法
+           },
+
+
+        nulls(){
+            for(let i=0; i<=3 ;i++){
+                for(let j=0; j<=3; j++){
+                    if(this["a"+i+j]==""){
+                        empty=true;
+                    }
+                }
+            }
+            return empty;
+        },//判断是否空格子
+
+
+        rightUP(){
+            for(let i=0;i<4;i++){
+                for(let j=2;j>=0;j--){
+                    for(let k=3;k>j;k--){
+                        if(this["a"+i+k]){
+                        if(this["a"+i+k]=""&&this.noBlockHorizontal(i,j,k)){
+                            this["a"+i+k]=this["a"+i+j];
+                            this["a"+i+j]=""
+                            
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        
+            
+
+
+            
+           
+
+
+        },
+        leftUP(){
+           this.create(); 
+
+
+        },
+        topUP(){
+           this.create(); 
+
+
+        },
+        downUP(){
+           this.create(); 
+
+
+        },
+
+
+        monitor(_this){
+            window.onkeydown=function(e){
+               
+                switch(e.keyCode){
+                    case 37:
+                       _this.leftUP()
+                        break;
+                    case 38:
+                         _this.topUP()  
+                        break;
+                    case 39:
+                         _this.rightUP()
+                        _this.create(); 
+                        break;
+                    case 40:
+                        _this.downUP()
+                        break;
+
+                    }
+
+                
+            }
+        },//监听键盘
+
+        noBlockHorizontal(row,col1,col2) {//判断x轴中间是否有障碍物
+            for(var i=col1+1;i<col2;i++)
+                if(this["a"+row+i])
+                    return false;
+            return true;
+        },
+        toBlockHorizontal(row,col1,col2) {//判断y轴中间是否有障碍物
+            for(var i=col1+1;i<col2;i++)
+                if(this["a"+i+row])
+                    return false;
+            return true;
+        
+    },
+
+
+
+           
+       },
        
       
       mounted(){
        let c1=(Math.random()*3).toFixed(0)
         let c2=(Math.random()*3).toFixed(0)
         let random=Math.random().toFixed(1)
-        let c3=(Math.random()*3).toFixed(0)
-        let c4=(Math.random()*3).toFixed(0)
-        let randoms=Math.random().toFixed(1) 
-        if(c1==c3&&c2==c4){
-            this.mounted()
-        } 
-        else{
-        this["a"+c3+c4]=this.arr[randoms>0.6? 1:0]
-        this["a"+c1+c2]=this.arr[random>0.6? 1:0]}
+        this["a"+c1+c2]=this.arr[random>0.6? 1:0]
+        this.create();
+        this.monitor(this);
+       
+         
+        
        },
+
+
+
        
        }
        

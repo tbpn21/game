@@ -2,7 +2,7 @@
 <div id="app">
   <div id="app00">
   <router-link to="/about" tag="button" id="app01"><h2>菜单</h2></router-link>
-  <router-link to="/home" tag="button" id="app01"><h2 >开始游戏</h2></router-link>
+  <router-link to="/home" tag="button" id="app01"><h2 @click="generate()">开始游戏</h2></router-link>
   </div>
   <router-view></router-view>
   </div>
