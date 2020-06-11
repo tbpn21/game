@@ -89,8 +89,9 @@
 
 
         nulls(){
-            for(let i=0; i<=3 ;i++){
-                for(let j=0; j<=3; j++){
+            let empty=false;
+            for(let i=0; i<4;i++){
+                for(let j=0; j<4; j++){
                     if(this["a"+i+j]==""){
                         empty=true;
                     }
@@ -98,39 +99,53 @@
             }
             return empty;
         },//判断是否空格子
+   
 
 
         rightUP(){
-            for(let i=0;i<4;i++){
-                for(let j=2;j>=0;j--){
-                    for(let k=3;k>j;k--){
-                        if(this["a"+i+k]){
-                        if(this["a"+i+k]=""&&this.noBlockHorizontal(i,j,k)){
-                            this["a"+i+k]=this["a"+i+j];
-                            this["a"+i+j]=""
-                            
+             let empty=false;
+            if(this.nulls()) {
+                for(let i=0;i<4;i++) {
+                    for(let j=2;j>-1;j--) {
+                        for(let k=3;k>j;k--) {//k为落子点坐标
+                            if(this["a"+i+j]) {//如果要跳转的格子为空 那就跳过
+                                if(this["a"+i+k]==""&&this.xaxis(i,j,k)) {//如果落子点为空的格子并且中间没障碍物则可落子
+                                    this["a"+i+k]=this["a"+i+j];//格子赋值
+                                    this["a"+i+j]="";
+                                } else if(this["a"+i+k]==this["a"+i+j]&&this.xaxis(i,j,k)) {
+                                    let a=parseInt(this["a"+i+k])+parseInt(this["a"+i+j]);
+                                    this["a"+i+k]=a;
+                                    this["a"+i+j]="";
+                                }
                             }
-
                         }
-
                     }
 
                 }
-
-            }
-        
-            
-
-
-            
-           
-
-
+            } return empty;
         },
         leftUP(){
-           this.create(); 
+       
+           let empty=false;
+            if(this.nulls()) {
+                for(let i=0;i<4;i++) {
+                    for(let j=1;j<4;j++) {
+                        for(let k=0;k<j;k++) {//k为落子点坐标
+                            if(this["a"+i+j]) {//如果要跳转的格子为空 那就跳过
+                                if(this["a"+i+k]==""&&this.xaxis(i,k,j)) {//如果落子点为空的格子并且中间没障碍物则可落子
+                                    this["a"+i+k]=this["a"+i+j];//格子赋值
+                                    this["a"+i+j]="";
+                                } else if(this["a"+i+k]==this["a"+i+j]&&this.xaxis(i,k,j)) {
+                                    let a=parseInt(this["a"+i+k])+parseInt(this["a"+i+j]);
+                                    this["a"+i+k]=a;
+                                    this["a"+i+j]="";
+                                }
+                            }
+                        }
+                    }
 
-
+                }
+            } return empty;
         },
         topUP(){
            this.create(); 
@@ -150,6 +165,7 @@
                 switch(e.keyCode){
                     case 37:
                        _this.leftUP()
+                        _this.create(); 
                         break;
                     case 38:
                          _this.topUP()  
@@ -168,15 +184,15 @@
             }
         },//监听键盘
 
-        noBlockHorizontal(row,col1,col2) {//判断x轴中间是否有障碍物
-            for(var i=col1+1;i<col2;i++)
-                if(this["a"+row+i])
+        xaxis(x,y,z) {//判断x轴中间是否有障碍物
+            for(var i=y+1;i<z;i++)
+                if(this["a"+x+i])
                     return false;
             return true;
         },
-        toBlockHorizontal(row,col1,col2) {//判断y轴中间是否有障碍物
-            for(var i=col1+1;i<col2;i++)
-                if(this["a"+i+row])
+        yaxis(x,y,z) {//判断y轴中间是否有障碍物
+            for(var i=y+1;i<z;i++)
+                if(this["a"+i+x])
                     return false;
             return true;
         

@@ -15,15 +15,12 @@ const routes = [
 component:about
 },
 
-{
-    path:'/home',
+{   path:'/home',
     name:home,
     component:home
-
 }
 
 ]
-
 const router = new VueRouter({
 
     routes,
